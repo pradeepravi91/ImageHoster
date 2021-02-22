@@ -27,13 +27,15 @@ public class ImageController {
     @Autowired
     private TagService tagService;
 
-    //This method displays all the images in the user home page after successful login
+    // This method displays all the images in the user home page after successful
+    // login
     @RequestMapping("images")
     public String getUserImages(Model model) {
         List<Image> images = imageService.getAllImages();
         model.addAttribute("images", images);
         return "images";
     }
+
 
     //This method is called when the details of the specific image with corresponding title are to be displayed
     //The logic is to get the image from the databse with corresponding title. After getting the image from the database the details are shown
@@ -132,7 +134,7 @@ public class ImageController {
         updatedImage.setDate(new Date());
 
         imageService.updateImage(updatedImage);
-        return "redirect:/images/" + updatedImage.getTitle();
+        return "redirect:/images/" + updatedImage.getId() + "/" + updatedImage.getTitle();
     }
 
 
@@ -178,6 +180,7 @@ public class ImageController {
     private String convertTagsToString(List<Tag> tags) {
         StringBuilder tagString = new StringBuilder();
 
+        if(tags.size() > 0) {
         for (int i = 0; i <= tags.size() - 2; i++) {
             tagString.append(tags.get(i).getName()).append(",");
         }
@@ -186,5 +189,8 @@ public class ImageController {
         tagString.append(lastTag.getName());
 
         return tagString.toString();
+        }else {
+            return "";
+        }
     }
 }
