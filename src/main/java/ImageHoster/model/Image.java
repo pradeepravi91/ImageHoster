@@ -126,4 +126,7 @@ public class Image {
     public void setTags(List<Tag> tags) {
         this.tags = tags;
     }
+
+    public Object getComments() {
+    }
 }

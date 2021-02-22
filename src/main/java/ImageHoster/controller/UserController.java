@@ -10,13 +10,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import sun.security.util.Password;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
 
 @Controller
-public class UserController {
+public class UserController<th> {
 
     @Autowired
     private UserService userService;
@@ -36,6 +37,7 @@ public class UserController {
         model.addAttribute("User", user);
         return "users/registration";
     }
+
 
     //This controller method is called when the request pattern is of type 'users/registration' and also the incoming request is of POST type
     //This method calls the business logic and after the user record is persisted in the database, directs to login page
